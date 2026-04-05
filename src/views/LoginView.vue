@@ -3,7 +3,9 @@
 </script>
 
 <template>
-login
+  <div class="text-blue-300">
+    bebra
+  </div>
 </template>
 
 <style scoped>
