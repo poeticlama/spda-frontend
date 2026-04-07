@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Miranda+Sans:ital,wght@0,400..700;1,400..700&display=swap');
 @import "tailwindcss";
 @plugin "daisyui";
 
 :root {
+    font-family: "Miranda Sans", sans-serif;
   /*--text: #6b6375;*/
   /*--text-h: #08060d;*/
   /*--bg: #fff;*/
