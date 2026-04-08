@@ -1,9 +1,8 @@
 import { createWebHistory, createRouter } from 'vue-router'
 import LoginView from "./views/LoginView.vue";
 import AdminHomeView from "./views/admin/AdminHomeView.vue";
-// import {useUserStore} from "./store/user.ts";
-//
-// const user = useUserStore()
+import {useUserStore} from "./store/user.ts";
+
 
 const routes = [
     { path: '/login', component: LoginView },
@@ -15,8 +14,9 @@ export const router = createRouter({
     routes,
 })
 
-// router.beforeEach(async (/* to, from */) => {
-//     if (!user.isAuthenticated) {
-//         return '/login'
-//     }
-// })
+router.beforeEach((to/*, from */) => {
+    const user = useUserStore()
+    if (!user.isAuthenticated && to.path !== '/login') {
+        return '/login'
+    }
+})
