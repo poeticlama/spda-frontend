@@ -21,47 +21,47 @@ import type {
 const request = <T>(promise: Promise<unknown>): Promise<T> => promise as Promise<T>;
 
 export function login(payload: TokenRequest) {
-	return request<TokenResponse>(instance.post("/api/v1/auth/login", payload));
+	return request<TokenResponse>(instance.post("/v1/auth/login", payload));
 }
 
 export function createDoctor(payload: DoctorCreateRequest) {
-	return request<DoctorResponse>(instance.post("/api/v1/admin/doctors", payload));
+	return request<DoctorResponse>(instance.post("/v1/admin/doctors", payload));
 }
 
 export function createPatient(payload: PatientCreateRequest) {
-	return request<PatientResponse>(instance.post("/api/v1/admin/patients", payload));
+	return request<PatientResponse>(instance.post("/v1/admin/patients", payload));
 }
 
 export function listPatients() {
-	return request<PatientSummaryResponse[]>(instance.get("/api/v1/doctors/me/patients"));
+	return request<PatientSummaryResponse[]>(instance.get("/v1/doctors/me/patients"));
 }
 
 export function listAvailablePatients() {
-	return request<PatientSummaryResponse[]>(instance.get("/api/v1/doctors/me/patients/available"));
+	return request<PatientSummaryResponse[]>(instance.get("/v1/doctors/me/patients/available"));
 }
 
 export function assignPatient(patientId: string) {
-	return request<AssignmentResponse>(instance.post(`/api/v1/doctors/me/patients/${encodeURIComponent(patientId)}/assign`));
+	return request<AssignmentResponse>(instance.post(`/v1/doctors/me/patients/${encodeURIComponent(patientId)}/assign`));
 }
 
 export function getPatientCard(patientId: string) {
-	return request<PatientCardResponse>(instance.get(`/api/v1/doctors/me/patients/${encodeURIComponent(patientId)}`));
+	return request<PatientCardResponse>(instance.get(`/v1/doctors/me/patients/${encodeURIComponent(patientId)}`));
 }
 
 export function addMedicalRecord(patientId: string, payload: MedicalRecordCreateRequest) {
-	return request<MedicalRecordResponse>(instance.post(`/api/v1/doctors/me/patients/${encodeURIComponent(patientId)}/medical-records`, payload));
+	return request<MedicalRecordResponse>(instance.post(`/v1/doctors/me/patients/${encodeURIComponent(patientId)}/medical-records`, payload));
 }
 
 export function addPrescription(patientId: string, payload: PrescriptionCreateRequest) {
-	return request<PrescriptionResponse>(instance.post(`/api/v1/doctors/me/patients/${encodeURIComponent(patientId)}/prescriptions`, payload));
+	return request<PrescriptionResponse>(instance.post(`/v1/doctors/me/patients/${encodeURIComponent(patientId)}/prescriptions`, payload));
 }
 
 export function getMyCard() {
-	return request<PatientCardResponse>(instance.get("/api/v1/patients/me"));
+	return request<PatientCardResponse>(instance.get("/v1/patients/me"));
 }
 
 export function updateMyProfile(payload: PatientUpdateRequest) {
-	return request<PatientResponse>(instance.patch("/api/v1/patients/me", payload));
+	return request<PatientResponse>(instance.patch("/v1/patients/me", payload));
 }
 
 export function healthcheck() {

@@ -2,7 +2,7 @@ import axios from "axios";
 import type {UserAuthInfo} from "../types.ts";
 
 const instance = axios.create({
-    baseURL: import.meta.env.API_URL,
+    baseURL: '/api',
     headers: {
         'Content-Type': 'application/json'
     },
