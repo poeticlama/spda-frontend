@@ -1,6 +1,6 @@
 import { defineStore } from "pinia"
 import { ref, computed } from "vue"
-import type {UserAuthInfo} from "../types.ts";
+import type { Role, UserAuthInfo } from "../types.ts"
 
 export const useUserStore = defineStore("user", () => {
     // state
@@ -9,6 +9,7 @@ export const useUserStore = defineStore("user", () => {
 
     // getters
     const token = computed(() => user.value?.accessToken)
+    const role = computed<Role | null>(() => user.value?.role ?? null)
     const isAuthenticated = computed(() => !!token.value)
 
     // init
@@ -17,7 +18,13 @@ export const useUserStore = defineStore("user", () => {
 
         const storedUser = localStorage.getItem("user")
 
-        if (storedUser) user.value = JSON.parse(storedUser) as UserAuthInfo
+        if (storedUser) {
+            try {
+                user.value = JSON.parse(storedUser) as UserAuthInfo
+            } catch {
+                localStorage.removeItem("user")
+            }
+        }
 
         isInitialized.value = true
     }
@@ -42,6 +49,7 @@ export const useUserStore = defineStore("user", () => {
         // state
         user,
         token,
+        role,
         isInitialized,
 
         // getters
@@ -51,6 +59,6 @@ export const useUserStore = defineStore("user", () => {
         init,
         setUser,
         login,
-        logout
+        logout,
     }
 })
