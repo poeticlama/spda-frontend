@@ -64,3 +64,12 @@ npm run dev
 ```bash
 npm run build
 ```
+
+## Docker
+
+```bash
+docker build -t spda-frontend .
+docker run --rm -p 8080:80 spda-frontend
+```
+
+После запуска приложение доступно на `http://localhost:8080`.
