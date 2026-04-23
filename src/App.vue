@@ -6,7 +6,7 @@ user.init()
 </script>
 
 <template>
-  <div data-theme="spda" class="min-h-screen bg-base-200 text-base-content">
+  <div data-theme="spda" class="min-h-screen bg-base-200/60 text-base-content antialiased">
     <RouterView />
   </div>
 </template>

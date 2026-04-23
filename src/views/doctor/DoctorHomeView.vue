@@ -13,15 +13,15 @@ function logout() {
 
 <template>
   <div class="min-h-screen">
-    <header class="navbar border-b border-base-300/70 bg-base-100/75 px-4 backdrop-blur md:px-8">
+    <header class="navbar border-b border-base-300/70 bg-base-100/75 px-4 py-2 backdrop-blur md:px-8">
       <div class="flex-1">
-        <h1 class="text-xl font-semibold">Панель врача</h1>
+        <h1 class="text-xl font-semibold tracking-tight">Панель врача</h1>
       </div>
       <button class="btn btn-outline btn-sm" @click="logout">Выйти</button>
     </header>
 
-    <main class="mx-auto w-full max-w-7xl px-4 py-6 lg:px-8">
-      <div role="tablist" class="aero-tabs tabs tabs-boxed mb-6 inline-flex p-1">
+    <main class="mx-auto w-full max-w-6xl px-4 py-6 lg:px-8 lg:py-8">
+      <div role="tablist" class="aero-tabs tabs tabs-boxed mb-6 flex w-full flex-wrap gap-1 p-1 sm:inline-flex sm:w-auto">
         <RouterLink to="/doctor/patients" class="tab" active-class="tab-active">Пациенты</RouterLink>
         <RouterLink to="/doctor/care" class="tab" active-class="tab-active">Карта и назначения</RouterLink>
       </div>

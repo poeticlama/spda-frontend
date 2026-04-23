@@ -1,4 +1,4 @@
-# SPDA Frontend
+# EMR Frontend
 
 Фронтенд системы ЭМК (электронной медкарты) на Vue 3, Vue Router, Pinia, TanStack Query, Axios, Tailwind и DaisyUI.
 
@@ -48,7 +48,7 @@
 ## UI и тема
 
 - Интерфейс переведен на русский язык
-- Добавлена кастомная тема DaisyUI `spda`
+- Добавлена кастомная тема DaisyUI 
 - Обновлены цвета `primary/secondary/accent/base` и состояния `success/error/warning`
 - Улучшена визуальная структура карточек/табов/форм для desktop и mobile
 

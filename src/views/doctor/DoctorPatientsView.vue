@@ -42,7 +42,7 @@ function assignPatientToDoctor(patientId: string) {
 <template>
   <div class="grid gap-6 lg:grid-cols-2">
     <section class="aero-panel card rounded-2xl">
-      <div class="card-body gap-4">
+      <div class="card-body gap-4 p-5 md:p-6">
         <h2 class="card-title">Мои пациенты</h2>
         <input
           :value="doctorStore.patientSearch"
@@ -55,7 +55,7 @@ function assignPatientToDoctor(patientId: string) {
           <li
             v-for="patient in filteredAssignedPatients"
             :key="patient.id"
-            class="cursor-pointer rounded-lg border p-3 transition hover:border-primary"
+            class="cursor-pointer rounded-xl border bg-base-100/70 p-3 transition hover:border-primary"
             :class="doctorStore.selectedPatientId === patient.id ? 'border-primary bg-primary/10' : 'border-base-300'"
             @click="selectPatient(patient.id)"
           >
@@ -71,10 +71,14 @@ function assignPatientToDoctor(patientId: string) {
     </section>
 
     <section class="aero-panel card rounded-2xl">
-      <div class="card-body gap-4">
+      <div class="card-body gap-4 p-5 md:p-6">
         <h2 class="card-title">Доступные пациенты</h2>
         <ul class="max-h-96 space-y-2 overflow-auto text-sm">
-          <li v-for="patient in availablePatientsQuery.data.value ?? []" :key="patient.id" class="rounded-lg border border-base-300 p-3">
+          <li
+            v-for="patient in availablePatientsQuery.data.value ?? []"
+            :key="patient.id"
+            class="rounded-xl border border-base-300 bg-base-100/70 p-3"
+          >
             <p class="font-medium">{{ patient.full_name }}</p>
             <p class="text-base-content/70">Полис: {{ patient.insurance_number }}</p>
             <button

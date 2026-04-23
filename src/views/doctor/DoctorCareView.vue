@@ -4,6 +4,7 @@ import { useAddMedicalRecord, useAddPrescription, usePatientCard } from "../../c
 import { useDoctorStore } from "../../store/doctor.ts"
 import type { MedicalRecordCreateRequest, PrescriptionCreateRequest } from "../../types.ts"
 import { parseApiError } from "../../utils/apiError.ts"
+import { formatDateRu, formatDateTimeRu } from "../../utils/dateFormat.ts"
 
 const doctorStore = useDoctorStore()
 const patientCardQuery = usePatientCard(computed(() => doctorStore.selectedPatientId))
@@ -101,13 +102,13 @@ function submitPrescription() {
 <template>
   <div class="grid gap-6 lg:grid-cols-3">
     <section class="aero-panel card rounded-2xl lg:col-span-1">
-      <div class="card-body gap-3 text-sm">
+      <div class="card-body gap-3 p-5 text-sm md:p-6">
         <h2 class="card-title">Карта пациента</h2>
         <p v-if="!doctorStore.selectedPatientId" class="text-base-content/70">Сначала выберите пациента во вкладке "Пациенты".</p>
         <p v-else-if="patientCardQuery.isLoading.value" class="text-base-content/70">Загрузка карты пациента...</p>
         <template v-else-if="patientCardQuery.data.value">
           <p><strong>ФИО:</strong> {{ patientCardQuery.data.value.personal_data.full_name }}</p>
-          <p><strong>Дата рождения:</strong> {{ patientCardQuery.data.value.personal_data.date_of_birth }}</p>
+          <p><strong>Дата рождения:</strong> {{ formatDateRu(patientCardQuery.data.value.personal_data.date_of_birth) }}</p>
           <p><strong>Телефон:</strong> {{ patientCardQuery.data.value.personal_data.phone }}</p>
           <p><strong>Email:</strong> {{ patientCardQuery.data.value.personal_data.email }}</p>
           <p><strong>Адрес:</strong> {{ patientCardQuery.data.value.personal_data.address }}</p>
@@ -116,7 +117,7 @@ function submitPrescription() {
     </section>
 
     <section class="aero-panel card rounded-2xl lg:col-span-2">
-      <div class="card-body grid gap-6 lg:grid-cols-2">
+      <div class="card-body grid gap-6 p-5 md:p-6 lg:grid-cols-2">
         <div>
           <h2 class="card-title">Новая медицинская запись</h2>
           <form class="mt-3 grid gap-3" @submit.prevent="submitMedicalRecord">
@@ -164,12 +165,16 @@ function submitPrescription() {
     </section>
 
     <section class="aero-panel card rounded-2xl lg:col-span-3">
-      <div class="card-body grid gap-6 lg:grid-cols-2">
+      <div class="card-body grid gap-6 p-5 md:p-6 lg:grid-cols-2">
         <div>
           <h2 class="card-title">История медицинских записей</h2>
           <ul class="mt-2 space-y-2 text-sm">
-            <li v-for="record in patientCardQuery.data.value?.medical_records ?? []" :key="record.id" class="rounded-lg bg-base-200 p-3">
-              <p class="font-medium">{{ record.visit_date }}</p>
+            <li
+              v-for="record in patientCardQuery.data.value?.medical_records ?? []"
+              :key="record.id"
+              class="rounded-xl border border-base-300/70 bg-base-100/70 p-3"
+            >
+              <p class="font-medium">{{ formatDateTimeRu(record.visit_date) }}</p>
               <p>{{ record.diagnosis }}</p>
               <p class="text-base-content/70">{{ record.doctor_comment }}</p>
             </li>
@@ -179,11 +184,11 @@ function submitPrescription() {
         <div>
           <h2 class="card-title">История рецептов</h2>
           <ul class="mt-2 space-y-2 text-sm">
-            <li
-              v-for="prescription in patientCardQuery.data.value?.prescriptions ?? []"
-              :key="prescription.id"
-              class="rounded-lg bg-base-200 p-3"
-            >
+              <li
+                v-for="prescription in patientCardQuery.data.value?.prescriptions ?? []"
+                :key="prescription.id"
+                class="rounded-xl border border-base-300/70 bg-base-100/70 p-3"
+              >
               <p class="font-medium">{{ prescription.title }}</p>
               <p>{{ prescription.dosage }} • {{ prescription.treatment_period }}</p>
               <p class="text-base-content/70">{{ prescription.doctor_comment }}</p>

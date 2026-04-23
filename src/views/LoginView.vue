@@ -40,32 +40,35 @@ function handleSubmit() {
 </script>
 
 <template>
-  <div class="min-h-screen px-4 py-10">
-    <div class="aero-panel mx-auto w-full max-w-md rounded-3xl p-6 md:p-8">
-      <h1 class="text-3xl font-semibold text-primary">Вход в систему</h1>
-      <p class="mt-2 text-sm text-base-content/70">Используйте учетные данные администратора, врача или пациента.</p>
+  <div class="flex min-h-screen items-center px-4 py-10">
+    <div class="aero-panel mx-auto w-full max-w-lg rounded-3xl p-6 md:p-9">
+      <div class="badge badge-outline badge-primary mb-4">EMR</div>
+      <h1 class="text-3xl font-semibold tracking-tight text-primary md:text-4xl">Вход в систему</h1>
+      <p class="mt-3 text-sm leading-relaxed text-base-content/70">
+        Используйте учетные данные администратора, врача или пациента.
+      </p>
 
-      <form class="mt-6 flex flex-col gap-4" @submit.prevent="handleSubmit">
+      <form class="mt-7 flex flex-col gap-4" @submit.prevent="handleSubmit">
         <label class="form-control w-full">
-          <span class="label-text">Логин</span>
+          <span class="label-text font-medium">Логин</span>
           <input
             v-model="username"
             type="text"
             required
             minlength="3"
-            class="input input-bordered w-full"
+            class="input input-bordered w-full text-base"
             placeholder="Введите логин"
           />
         </label>
 
         <label class="form-control w-full">
-          <span class="label-text">Пароль</span>
+          <span class="label-text font-medium">Пароль</span>
           <input
             v-model="password"
             type="password"
             required
             minlength="8"
-            class="input input-bordered w-full"
+            class="input input-bordered w-full text-base"
             placeholder="Введите пароль"
           />
         </label>
@@ -74,7 +77,7 @@ function handleSubmit() {
           <span>{{ errorMessage }}</span>
         </div>
 
-        <button type="submit" class="btn btn-primary mt-2" :disabled="isSubmitting">
+        <button type="submit" class="btn btn-primary mt-3" :disabled="isSubmitting">
           <span v-if="isSubmitting" class="loading loading-spinner loading-xs" />
           <span>{{ isSubmitting ? "Выполняется вход..." : "Войти" }}</span>
         </button>

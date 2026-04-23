@@ -3,6 +3,7 @@ import { ref, watch } from "vue"
 import { usePatientProfile, useUpdatePatientProfile } from "../../composables/patient.ts"
 import { usePatientStore } from "../../store/patient.ts"
 import { parseApiError } from "../../utils/apiError.ts"
+import { formatDateRu } from "../../utils/dateFormat.ts"
 
 const patientStore = usePatientStore()
 const patientProfileQuery = usePatientProfile()
@@ -48,21 +49,21 @@ function submitProfile() {
 <template>
   <div class="grid gap-6 lg:grid-cols-3">
     <section class="aero-panel card rounded-2xl lg:col-span-1">
-      <div class="card-body text-sm">
+      <div class="card-body gap-2 p-5 text-sm md:p-6">
         <h2 class="card-title">Моя карточка</h2>
         <p v-if="patientProfileQuery.isLoading.value" class="text-base-content/70">Загрузка данных...</p>
         <template v-else-if="patientProfileQuery.data.value">
           <p><strong>ФИО:</strong> {{ patientProfileQuery.data.value.personal_data.full_name }}</p>
-          <p><strong>Дата рождения:</strong> {{ patientProfileQuery.data.value.personal_data.date_of_birth }}</p>
-          <p><strong>Пол:</strong> {{ patientProfileQuery.data.value.personal_data.gender }}</p>
+          <p><strong>Дата рождения:</strong> {{ formatDateRu(patientProfileQuery.data.value.personal_data.date_of_birth) }}</p>
+          <p><strong>Пол:</strong> {{ patientProfileQuery.data.value.personal_data.gender === "male" ? "Мужской": "Женский"}}</p>
           <p><strong>Полис:</strong> {{ patientProfileQuery.data.value.personal_data.insurance_number }}</p>
-          <p><strong>ID врача:</strong> {{ patientProfileQuery.data.value.assigned_doctor_id || "Не назначен" }}</p>
+          <p><strong>Врач:</strong> {{ patientProfileQuery.data.value.assigned_doctor_id ? "Назначен" : "Не назначен" }}</p>
         </template>
       </div>
     </section>
 
     <section class="aero-panel card rounded-2xl lg:col-span-2">
-      <div class="card-body">
+      <div class="card-body gap-4 p-5 md:p-6">
         <h2 class="card-title">Контактные данные</h2>
         <form class="mt-2 grid gap-3 md:grid-cols-2" @submit.prevent="submitProfile">
           <input

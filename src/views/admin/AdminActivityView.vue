@@ -6,11 +6,11 @@ const adminStore = useAdminStore()
 
 <template>
   <section class="aero-panel card rounded-2xl">
-    <div class="card-body grid gap-4 md:grid-cols-2">
+    <div class="card-body grid gap-5 p-5 md:grid-cols-2 md:p-7">
       <div>
         <h2 class="card-title">Добавленные врачи</h2>
         <ul class="mt-2 space-y-2 text-sm">
-          <li v-for="doctor in adminStore.createdDoctors" :key="doctor.id" class="rounded-lg bg-base-200 p-3">
+          <li v-for="doctor in adminStore.createdDoctors" :key="doctor.id" class="rounded-xl border border-base-300/70 bg-base-100/70 p-3">
             <p class="font-medium">{{ doctor.full_name }}</p>
             <p class="text-base-content/70">{{ doctor.specialization }} • {{ doctor.phone }}</p>
             <p class="text-base-content/70">{{ doctor.email }}</p>
@@ -22,7 +22,7 @@ const adminStore = useAdminStore()
       <div>
         <h2 class="card-title">Добавленные пациенты</h2>
         <ul class="mt-2 space-y-2 text-sm">
-          <li v-for="patient in adminStore.createdPatients" :key="patient.id" class="rounded-lg bg-base-200 p-3">
+          <li v-for="patient in adminStore.createdPatients" :key="patient.id" class="rounded-xl border border-base-300/70 bg-base-100/70 p-3">
             <p class="font-medium">{{ patient.full_name }}</p>
             <p class="text-base-content/70">{{ patient.insurance_number }} • {{ patient.phone }}</p>
             <p class="text-base-content/70">{{ patient.email }}</p>

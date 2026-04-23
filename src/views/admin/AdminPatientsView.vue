@@ -51,7 +51,7 @@ function submitPatientForm() {
 
 <template>
   <section class="aero-panel card rounded-2xl">
-    <div class="card-body">
+    <div class="card-body gap-5 p-5 md:p-7">
       <h2 class="card-title">Добавление пациента</h2>
       <form class="grid gap-3 md:grid-cols-2" @submit.prevent="submitPatientForm">
         <input v-model="patientForm.full_name" class="input input-bordered md:col-span-2" required minlength="3" placeholder="ФИО" />
